@@ -36,17 +36,20 @@ namespace SalaFitness
         {
             base.OnAppearing();
 
-            // Verifică dacă BindingContext este de tipul așteptat
-            if (BindingContext is Abonament abonament)
-            {
-                // Obține lista de produse asociate acestui abonament
-                var listProducts = await App.Database.GetListProductsAsync(abonament.ID);
-
-
-                // Asigură-te că abonamentListView este definit în fișierul XAML și are x:Name="abonamentListView"
-                abonamentListView.ItemsSource = listProducts;
-            }
+            
         }
+
+        async void OnAddButtonClicked(object sender, EventArgs e)
+        {
+            // Your logic for handling the "Adaugă în listă" (Add to list) button
+            // For example, you might want to navigate to a new page to add details to the abonament
+            await Navigation.PushAsync(new DetaliiAbonamentPage
+            {
+                BindingContext = abonament // Pass the current abonament to the new page if needed
+            });
+        }
+
+
 
 
     }

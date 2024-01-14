@@ -32,5 +32,23 @@ namespace SalaFitness
             listView.ItemsSource = await App.Database.GetDetaliiAbonamenteAsync();
         }
 
+        async void OnAddButtonClicked(object sender, EventArgs e)
+        {
+            var detaliiAbonament = (DetaliiAbonament)BindingContext;
+
+            // Assuming you have a list of DetaliiAbonament items in your database
+            // You might need to adapt this based on your actual data structure
+            var existingList = await App.Database.GetDetaliiAbonamenteAsync();
+
+            // Add the current detaliiAbonament to the list
+            existingList.Add(detaliiAbonament);
+
+            // Save the updated list to the database
+            await App.Database.SaveDetaliiAbonamenteListAsync(existingList);
+
+            // Refresh the listView to display the updated list
+            listView.ItemsSource = existingList;
+        }
+
     }
 }

@@ -92,5 +92,29 @@ namespace SalaFitness.Data
         {
             return _database.Table<DetaliiAbonament>().ToListAsync();
         }
+
+        public async Task<int> SaveDetaliiAbonamenteListAsync(List<DetaliiAbonament> detaliiAbonamenteList)
+        {
+            // Implement the logic to save the list to the database
+            // This might involve updating or inserting each item in the list
+            // Adjust this code based on your specific database implementation
+
+            // For example:
+            foreach (var detaliiAbonament in detaliiAbonamenteList)
+            {
+                if (detaliiAbonament.ID != 0)
+                {
+                    await _database.UpdateAsync(detaliiAbonament);
+                }
+                else
+                {
+                    await _database.InsertAsync(detaliiAbonament);
+                }
+            }
+
+            return 1; // Return a result indicating success
+        }
+
+
     }
 }
